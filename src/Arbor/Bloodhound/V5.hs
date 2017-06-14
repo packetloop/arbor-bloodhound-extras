@@ -1,11 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Arbor.Bloodhound.V5
-    ( summariseEsProtocolException
+    ( throwSummarisedEsProtocolException
     ) where
 
 import Control.Exception
 import Control.Lens
+import Control.Monad.Catch
 import Database.V5.Bloodhound
 import Data.Aeson.Lens
 
@@ -13,8 +14,8 @@ import qualified Data.Aeson.Lens as J
 import qualified Data.Aeson as J (decode, encode, Value(..), toJSON)
 
 -- | Rewrite the body of the exception to only contain errors.
-summariseEsProtocolException :: EsProtocolException -> a
-summariseEsProtocolException e = throw EsProtocolException
+throwSummarisedEsProtocolException :: MonadThrow m => EsProtocolException -> m a
+throwSummarisedEsProtocolException e = throwM EsProtocolException
   { esProtoExBody = errorsMessage
   }
   where text          = esProtoExBody e
