@@ -1,4 +1,4 @@
-module Lib
+module Arbor.Bloodhound.V5
     ( someFunc
     ) where
 
