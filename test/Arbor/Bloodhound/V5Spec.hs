@@ -99,7 +99,7 @@ throwESProtocolException = throw EsProtocolException
 
 spec :: Spec
 spec = do
-  describe "summariseEsProtocolException" $ do
+  describe "throwSummarisedEsProtocolException" $ do
     it "should filter out non-errors" $ do
       let expectedMessage :: Maybe J.Value = J.decode "\
         \ [                                                                   \
@@ -134,7 +134,7 @@ spec = do
         \ ]                                                                   \
         \"
       result <- throwESProtocolException
-            `catch` summariseEsProtocolException
+            `catch` throwSummarisedEsProtocolException
             `catch` \(e :: EsProtocolException) -> return (esProtoExBody e)
 
       J.decode result `shouldBe` expectedMessage
