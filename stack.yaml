@@ -37,6 +37,11 @@ resolver: lts-8.18
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - '.'
+- location:
+    git: git@github.com:packetloop/bloodhound.git
+    commit: 5c10b3bc29e0e3fbb55a1434bdf4ee77910a2a16
+  extra-dep: true
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []
